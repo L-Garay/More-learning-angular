@@ -12,7 +12,6 @@ export class UsersComponent implements OnInit {
   loaded: boolean = false;
   allowNewUser: boolean = true;
   toggleForm: boolean = false;
-  customStyles: object = {};
 
   constructor() {}
 
@@ -65,6 +64,7 @@ export class UsersComponent implements OnInit {
         age: 22,
         email: 'logan@email.com',
         image: 'https://via.placeholder.com/200/200',
+        registeredDate: new Date('01/12/2015 08:30:00'),
         isActive: true,
         address: {
           street: '123 W st',
@@ -78,6 +78,7 @@ export class UsersComponent implements OnInit {
         age: 42,
         email: 'bob@email.com',
         image: 'https://via.placeholder.com/200/200',
+        registeredDate: new Date('06/29/2012 08:30:00'),
         isActive: false,
         address: {
           street: '987 S ave',
@@ -91,6 +92,7 @@ export class UsersComponent implements OnInit {
         age: 32,
         email: 'rachel@email.com',
         image: 'https://via.placeholder.com/200/200',
+        registeredDate: new Date('11/07/2014 08:30:00'),
         isActive: true,
         address: {
           street: '456 E blvd',
@@ -104,6 +106,7 @@ export class UsersComponent implements OnInit {
         age: 56,
         email: 'tim@email.com',
         image: 'https://via.placeholder.com/200/200',
+        registeredDate: new Date('09/22/2019 08:30:00'),
         isActive: false,
       },
     ];
