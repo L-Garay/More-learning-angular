@@ -1,7 +1,152 @@
 <p>This is the Users component.</p>
-<button class="btn btn-sm mb3" [class.allowNewUser]="allowNewUser">
+<button
+  (click)="toggleForm = !toggleForm"
+  class="btn btn-sm mb3"
+  [class.allowNewUser]="allowNewUser"
+>
   Add new user
 </button>
+<form
+  *ngIf="toggleForm"
+  #userForm="ngForm"
+  (ngSubmit)="submitNewUser(userForm)"
+>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        placeholder="Bob"
+        [(ngModel)]="newUser.firstName"
+        name="firstName"
+        required
+        minlength="2"
+        #userFirstName="ngModel"
+        [ngClass]="{
+          'is-invalid': userFirstName.errors && userFirstName.touched
+        }"
+      />
+      <p class="invalid-feedback" [hidden]="!userFirstName.errors?.required">
+        First name required!
+      </p>
+      <p class="invalid-feedback" [hidden]="!userFirstName.errors?.minlength">
+        Must be 2 characters!
+      </p>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="lastName">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        placeholder="Smith"
+        [(ngModel)]="newUser.lastName"
+        name="lastName"
+        required
+        minlength="2"
+        #userLastName="ngModel"
+        [ngClass]="{
+          'is-invalid': userLastName.errors && userLastName.touched
+        }"
+      />
+      <p class="invalid-feedback" [hidden]="!userLastName.errors?.required">
+        Last name required!
+      </p>
+      <p class="invalid-feedback" [hidden]="!userLastName.errors?.minlength">
+        Must be 2 characters!
+      </p>
+    </div>
+    <div class="form-group col-md-1">
+      <label for="inputAge">Age</label>
+      <input
+        type="number"
+        class="form-control"
+        id="inputAge"
+        [(ngModel)]="newUser.age"
+        name="age"
+      />
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="inputEmail4">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="inputEmail4"
+        placeholder="example@email.com"
+        [(ngModel)]="newUser.email"
+        name="email"
+        required
+        pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+        #userEmail="ngModel"
+        [ngClass]="{
+          'is-invalid': userEmail.errors && userEmail.touched
+        }"
+      />
+      <p class="invalid-feedback" [hidden]="!userEmail.errors?.required">
+        Email is required!
+      </p>
+      <p class="invalid-feedback" [hidden]="!userEmail.errors?.pattern">
+        Email is not valid!
+      </p>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputImage">Profile Image Url</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputImage"
+        [(ngModel)]="newUser.image"
+        name="image"
+      />
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputAddress">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputAddress"
+        placeholder="1234 Main St"
+        [(ngModel)]="newUser.address.street"
+        name="street"
+      />
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputCity">City</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputCity"
+        placeholder="New York"
+        [(ngModel)]="newUser.address.city"
+        name="city"
+      />
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputState">State</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputState"
+        placeholder="New York"
+        [(ngModel)]="newUser.address.state"
+        name="state"
+      />
+    </div>
+  </div>
+  <button
+    type="submit"
+    [disabled]="!userForm.form.valid"
+    class="btn btn-primary"
+  >
+    Register
+  </button>
+</form>
 <h4>Here are all the current users</h4>
 <div *ngIf="users?.length > 0">
   <ul>
@@ -11,18 +156,28 @@
       [style.border-color]="user.isActive ? 'red' : 'black'"
       *ngFor="let user of users"
     >
-      <h5>Name: {{ user.firstName + " " + user.lastName }}</h5>
+      <h5>
+        Name: {{ user.firstName + " " + user.lastName }}
+        <i
+          (click)="user.hide = !user.hide"
+          [ngClass]="user.hide ? 'fas fa-search-plus' : 'fas fa-search-minus'"
+        ></i>
+      </h5>
       <div class="row">
         <div class="col-4">
           <img [src]="user.image" alt="" />
         </div>
         <div class="col-8">
-          <ul *ngIf="showExtended">
+          <ul *ngIf="!user.hide">
             <li>Age: {{ user.age }}</li>
             <li>Email: {{ user.email }}</li>
             <li *ngIf="user.address">
               Address: {{ user.address.street }} {{ user.address.city }},
               {{ user.address.state }}
+            </li>
+            <li *ngIf="user.street">
+              Address: {{ user.street }} {{ user.city }},
+              {{ user.state }}
             </li>
             <li>Joined: {{ user.registeredDate | date }}</li>
           </ul>
