@@ -139,11 +139,7 @@ export class UsersComponent implements OnInit {
       value.isActive = true;
       value.registeredDate = new Date();
       value.hide = true;
-      console.log(value);
-
       this.users.unshift(value);
-      console.log(this.users);
-
       this.form.reset();
     }
   }
