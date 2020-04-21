@@ -3,6 +3,8 @@ export interface IUser {
   lastName: string;
   age: number;
   email: string;
+  image: string;
+  isActive?: boolean;
   address?: {
     /* NOTE adding a ? after a property means that it is optional when creating a new object*/
     street?: string;

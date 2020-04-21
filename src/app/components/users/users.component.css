@@ -1,0 +1,11 @@
+.allowNewUser {
+  background-color: lightsalmon;
+  border: 1pt solid black;
+}
+.allowNewUser:hover {
+  cursor: pointer;
+  box-shadow: 0 0 3pt black;
+}
+.isActive {
+  background-color: rgb(0, 0, 0, 0.6);
+}
