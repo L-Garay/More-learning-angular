@@ -9,6 +9,7 @@ import { IPost } from 'src/app/Interfaces/Post';
 })
 export class PostsFormComponent implements OnInit {
   @Output() newPost: EventEmitter<IPost> = new EventEmitter();
+  @Output() updatedPost: EventEmitter<IPost> = new EventEmitter();
   @Input() currentPost: IPost;
   @Input() isEdit: boolean;
   constructor(private _postDataService: PostDataService) {}
@@ -30,6 +31,9 @@ export class PostsFormComponent implements OnInit {
   updatePost() {
     this._postDataService.updatePost(this.currentPost).subscribe((post) => {
       console.log(post);
+
+      this.isEdit = false;
+      this.updatedPost.emit(post);
     });
   }
 }

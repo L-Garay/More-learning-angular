@@ -31,4 +31,20 @@ export class PostsHttpRequestsComponent implements OnInit {
     this.currentPost = post;
     this.isEdit = true;
   }
+  onUpdatedPost(post: IPost) {
+    this.posts.forEach((current, index) => {
+      if (post.id === current.id) {
+        this.posts.splice(index, 1);
+        this.posts.unshift(post);
+        this.isEdit = false;
+        this.currentPost = {
+          id: 0,
+          title: '',
+          body: '',
+        };
+      } else {
+        console.log("can't find the post");
+      }
+    });
+  }
 }
