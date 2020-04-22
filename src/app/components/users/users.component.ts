@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IUser } from 'src/app/Interfaces/User';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-users',
@@ -29,7 +30,7 @@ export class UsersComponent implements OnInit {
   };
   @ViewChild('userForm') form: any;
 
-  constructor() {}
+  constructor(private _userData: UserDataService) {}
 
   // NOTE Fake loading example
   // ngOnInit(): void {
@@ -73,63 +74,10 @@ export class UsersComponent implements OnInit {
   //   }, 2500);
   // }
   ngOnInit(): void {
-    this.users = [
-      {
-        firstName: 'Logan',
-        lastName: 'Garay',
-        age: 22,
-        email: 'logan@email.com',
-        image: 'https://via.placeholder.com/200/200',
-        registeredDate: new Date('01/12/2015 08:30:00'),
-        isActive: true,
-        hide: true,
-        address: {
-          street: '123 W st',
-          city: 'Boise',
-          state: 'ID',
-        },
-      },
-      {
-        firstName: 'Bob',
-        lastName: 'Smith',
-        age: 42,
-        email: 'bob@email.com',
-        image: 'https://via.placeholder.com/200/200',
-        registeredDate: new Date('06/29/2012 08:30:00'),
-        isActive: false,
-        hide: true,
-        address: {
-          street: '987 S ave',
-          city: 'Boise',
-          state: 'ID',
-        },
-      },
-      {
-        firstName: 'Rachel',
-        lastName: 'Green',
-        age: 32,
-        email: 'rachel@email.com',
-        image: 'https://via.placeholder.com/200/200',
-        registeredDate: new Date('11/07/2014 08:30:00'),
-        isActive: true,
-        hide: true,
-        address: {
-          street: '456 E blvd',
-          city: 'Nampa',
-          state: 'ID',
-        },
-      },
-      {
-        firstName: 'Tim',
-        lastName: 'Vance',
-        age: 56,
-        email: 'tim@email.com',
-        image: 'https://via.placeholder.com/200/200',
-        registeredDate: new Date('09/22/2019 08:30:00'),
-        isActive: false,
-        hide: true,
-      },
-    ];
+    this._userData.getUsers().subscribe((users) => {
+      this.users = users;
+      /* this.loaded = true; */
+    });
   }
 
   submitNewUser({ value, valid }: { value: IUser; valid: boolean }) {
@@ -139,7 +87,7 @@ export class UsersComponent implements OnInit {
       value.isActive = true;
       value.registeredDate = new Date();
       value.hide = true;
-      this.users.unshift(value);
+      this._userData.addUser(value);
       this.form.reset();
     }
   }

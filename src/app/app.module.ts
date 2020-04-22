@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserComponent } from './components/user/user.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { UserDataService } from './services/user-data.service';
 
 @NgModule({
   declarations: [AppComponent, UsersComponent, UserComponent, NavbarComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [],
+  providers: [UserDataService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
