@@ -3,11 +3,11 @@ import { IPost } from 'src/app/Interfaces/Post';
 import { PostDataService } from 'src/app/services/post-data.service';
 
 @Component({
-  selector: 'app-user-http-requests',
-  templateUrl: './user-http-requests.component.html',
-  styleUrls: ['./user-http-requests.component.css'],
+  selector: 'app-posts-http-requests',
+  templateUrl: './posts-http-requests.component.html',
+  styleUrls: ['./posts-http-requests.component.css'],
 })
-export class UserHttpRequestsComponent implements OnInit {
+export class PostsHttpRequestsComponent implements OnInit {
   posts: IPost[];
   constructor(private _postService: PostDataService) {}
 
@@ -15,5 +15,9 @@ export class UserHttpRequestsComponent implements OnInit {
     this._postService.getPosts().subscribe((posts) => {
       this.posts = posts;
     });
+  }
+
+  onNewPost(post: IPost) {
+    this.posts.unshift(post);
   }
 }

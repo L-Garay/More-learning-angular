@@ -9,7 +9,9 @@ import { UserComponent } from './components/user/user.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserDataService } from './services/user-data.service';
 import { PostDataService } from './services/post-data.service';
-import { UserHttpRequestsComponent } from './components/user-http-requests/user-http-requests.component';
+
+import { PostsFormComponent } from './components/posts-form/posts-form.component';
+import { PostsHttpRequestsComponent } from './components/posts-http-requests/posts-http-requests.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { UserHttpRequestsComponent } from './components/user-http-requests/user-
     UsersComponent,
     UserComponent,
     NavbarComponent,
-    UserHttpRequestsComponent,
+
+    PostsFormComponent,
+    PostsHttpRequestsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [UserDataService, PostDataService],
