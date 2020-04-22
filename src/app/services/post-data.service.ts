@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { IPost } from 'src/app/Interfaces/Post';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-type': 'application/json' }),
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
 };
 
 @Injectable({
@@ -19,5 +21,9 @@ export class PostDataService {
   }
   addPost(post: IPost): Observable<IPost> {
     return this._http.post<IPost>(this._postsUrl, post, httpOptions);
+  }
+  updatePost(post: IPost): Observable<IPost> {
+    const updateUrl = `${this._postsUrl}/${post.id}`;
+    return this._http.put<IPost>(updateUrl, post, httpOptions);
   }
 }
