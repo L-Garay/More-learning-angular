@@ -12,6 +12,9 @@ import { PostDataService } from './services/post-data.service';
 
 import { PostsFormComponent } from './components/posts-form/posts-form.component';
 import { PostsHttpRequestsComponent } from './components/posts-http-requests/posts-http-requests.component';
+import { HomeComponent } from './components/home/home.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { PostsHttpRequestsComponent } from './components/posts-http-requests/pos
 
     PostsFormComponent,
     PostsHttpRequestsComponent,
+    HomeComponent,
+    PostDetailComponent,
+    NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [UserDataService, PostDataService],
