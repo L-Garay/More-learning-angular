@@ -11,7 +11,9 @@
     <p>{{ post.body }}</p>
     <div class="buttons">
       <div class="btn btn-warning mx-2" (click)="editPost(post)">Edit post</div>
-      <div class="btn btn-danger mx-2">Delete post</div>
+      <div class="btn btn-danger mx-2" (click)="deletePost(post)">
+        Delete post
+      </div>
     </div>
   </div>
 </div>

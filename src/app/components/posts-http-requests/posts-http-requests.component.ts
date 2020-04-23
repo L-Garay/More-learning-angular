@@ -47,4 +47,18 @@ export class PostsHttpRequestsComponent implements OnInit {
       }
     });
   }
+
+  deletePost(post: IPost) {
+    if (confirm('Are you sure you want to delete?')) {
+      this._postService.deletePost(post.id).subscribe(() => {
+        this.posts.forEach((current, index) => {
+          if (post.id === current.id) {
+            this.posts.splice(index, 1);
+          } else {
+            console.log("Can't find that post");
+          }
+        });
+      });
+    }
+  }
 }

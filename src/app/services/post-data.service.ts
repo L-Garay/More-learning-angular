@@ -26,4 +26,8 @@ export class PostDataService {
     const updateUrl = `${this._postsUrl}/${post.id}`;
     return this._http.put<IPost>(updateUrl, post, httpOptions);
   }
+  deletePost(postId: number): Observable<IPost> {
+    const url = `${this._postsUrl}/${postId}`;
+    return this._http.delete<IPost>(url, httpOptions);
+  }
 }
